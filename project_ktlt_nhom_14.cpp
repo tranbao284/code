@@ -277,6 +277,7 @@ int main(){
 		cout<<"\nNhap MSSV cua sv muon xoa: ";
 		int msxoa;
 		cin>> msxoa ;
+		int check=1;
 		for(int i=0;i<sosv;i++){
 			if(msxoa==arr[i].mssv){
 				for(int j=i;j<sosv;j++){
@@ -299,9 +300,11 @@ int main(){
 				}
 				tepghi.close();
 				cout<<"\nXoa thanh cong!\n"<<endl;
-			}else{
-				cout<<"\nKhong tim thay sinh vien can xoa!\n"<<endl;
+				check=0;
 			}
+		}
+		if(check){
+			cout<<"\nKhong tim thay sinh vien can xoa!\n"<<endl;
 		}
 
 	}else if(luachon==7){
