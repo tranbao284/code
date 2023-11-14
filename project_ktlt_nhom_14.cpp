@@ -1,5 +1,5 @@
 //duong dan file danh sach: D:\\Code cpp\\danhsach.txt
-//neu chua co file thi tao 1 file "danhsach.txt" trong folder "Code cpp" nam trong o dia D:
+//neu chua co file thi tao 1 file "danhsach.txt" trong folder "Code cpp" nam trong o dia "D:"
 
 #include<bits/stdc++.h>
 
@@ -176,7 +176,7 @@ void sua(sv arr[],int n){
 		}else if(option==4){
 			cout<<"Nhap vao ngay sinh: ";
 			cin.ignore(numeric_limits<streamsize>::max(),'\n');
-			cin>>arr[stt-1].ns;
+			getline(cin, arr[stt-1].ns);
 		}else if(option==5){
 			cout<<"Nhap vao gioi tinh: "; 
 			cin.ignore(numeric_limits<streamsize>::max(),'\n');
