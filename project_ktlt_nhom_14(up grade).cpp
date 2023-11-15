@@ -309,8 +309,10 @@ int main(){
 	cout<<"2: Giang vien"<<endl;
 	cout<<"0: Thoat"<<endl;
 	cin>>quyen;
+
 	if (quyen==1){
 		isgv=0;
+
 	}else if(quyen==2){
 		ifstream doctk("D:\\Code cpp\\taikhoan.txt");
 		if(doctk.fail()){
@@ -337,8 +339,10 @@ int main(){
 		cout<<"0. Thoat"<<endl;
 		int lctk;
 		cin>>lctk;
+
 		if(lctk==0){
 			return 0;
+
 		}else if(lctk==1){
 			int kiemtra=0;
 			string kttk, ktmk;
@@ -347,12 +351,11 @@ int main(){
 				cin.ignore();
 				getline(cin,kttk);
 				cout<<"Nhap mat khau: ";
+
 				while(1){
 					char ch = _getch();
 					if(ch==13){
-						if(ch==13){
-							break;
-						}
+						break;
 					}else if(ch==8){
 						if(!ktmk.empty()){
 							cout<<"\b \b";
@@ -365,11 +368,13 @@ int main(){
 						ktmk+=ch;
 					}
 				}
+
 				for(int i=0; i<sotk; i++) {
 					if((kttk==tkgv[i].gettk())&&(ktmk==tkgv[i].getmk())){
 						kiemtra =1;
 					}
 				}
+
 				if(kiemtra){
 					isgv=1;
 				}else{
@@ -388,6 +393,7 @@ int main(){
 			cin.ignore();
 			getline(cin,dktk);
 			cout<<"Nhap ma so giang vien: ";
+
 			while(1){
 				char ch = _getch();
 				if(ch==13){
@@ -411,6 +417,7 @@ int main(){
 				}
 			}
 			cout<<"\nNhap mat khau: ";
+
 			while(1){
 				char ch = _getch();
 				if(ch==13){
@@ -434,6 +441,7 @@ int main(){
 				}
 			}
 			cout<<"\nXac nhan mat khau: ";
+
 			while(1){
 				char ch = _getch();
 				if(ch==13){
@@ -471,6 +479,7 @@ int main(){
 			cout<<"Tao tai khoan thanh cong!"<<endl;
 			sotk++;
 			isgv=1;
+
 		}else if(lctk==3){
 			string tkdmk, msgvdmk;
 			cout<<"Nhap vao tai khoan: ";
@@ -479,6 +488,7 @@ int main(){
 			cout<<"Nhap vao ma so giang vien: ";
 			getline(cin,msgvdmk);
 			int checkdmk=0, shtk;
+
 			for(int i=0; i< sotk; i++){
 				if((tkdmk==tkgv[i].gettk())&&(msgvdmk==tkgv[i].getmsgv())){
 					checkdmk=1;
@@ -486,6 +496,7 @@ int main(){
 					break;
 				}
 			}
+
 			if(checkdmk){
 				string dkmkm, xnmkm;
 				cout<<"\nNhap mat khau moi: ";
@@ -512,6 +523,7 @@ int main(){
 					}
 				}
 				cout<<"\nXac nhan mat khau moi: ";
+
 				while(1){
 					char ch = _getch();
 					if(ch==13){
@@ -534,12 +546,14 @@ int main(){
 						xnmkm+=ch;
 					}
 				}
+
 				tkgv[shtk].setmk(dkmkm);
 				ofstream ghitk("D:\\Code cpp\\taikhoan.txt");
 				if(ghitk.fail()){
 					cout<<"Mo tep tai khoan that bai"<<endl;
 					return -1;
 				}
+
 				for(int i=0; i<sotk; i++){
 					ghitk << tkgv[i].gettk() << endl;
 					ghitk << tkgv[i].getmsgv() << endl;
@@ -549,19 +563,24 @@ int main(){
 				cout<<"\nDoi mat khau thanh cong."<<endl;
 				cout<<"Chay lai de dang nhap"<<endl;
 				return 0;
+
 			}else{
 				cout<<"Ma so giang vien hoac tai khoan khong chinh xac"<<endl;
 				cout<<"Doi mat khau that bai"<<endl;
 				return 0;
 			}
+
 		}else if(lctk==4){
 			isgv=0;
+
 		}else{
 			return 0;
 		}
+
 	}else{
 		return 0;
 	}
+
 	int sosv=0;
 	ifstream tepdoc("D:\\Code cpp\\danhsach.txt");
 	if(tepdoc.fail()){
@@ -595,6 +614,7 @@ int main(){
 	sosv--;
 	int luachon;
 	system("cls");
+
 	if(isgv){
 		while(1){
 			cout<<"=============================== MENU ==============================="<<endl;
@@ -610,10 +630,13 @@ int main(){
 			cout<<"10. Clear screen."<<endl;
 			cout<<"0. Thoat."<<endl;
 			cout<<"\nNhap vao lua chon cua ban: "; cin>> luachon;
+
 		if(luachon==0){
 			break;
+
 		}else if(luachon==1){
 			inds(arr,sosv);
+
 		}else if(luachon==2){
 			ofstream tepghi("D:\\Code cpp\\danhsach.txt", ios::app);
 			if(tepghi.fail()){
@@ -630,10 +653,13 @@ int main(){
 			tepghi << arr[sosv].getno() <<endl;
 			tepghi.close();
 			sosv++;
+
 		}else if(luachon==3){
 			timmssv(arr,sosv);
+
 		}else if(luachon==4){
 			timlop(arr, sosv);
+
 		}else if(luachon==5){
 			sapxep(arr,sosv);
 			ofstream tepghi("D:\\Code cpp\\danhsach.txt");
@@ -641,6 +667,7 @@ int main(){
 				cout<<"Mo file that bai!";
 				return -1;
 			}
+
 			for(int i=0;i<sosv;i++){
 				tepghi << arr[i].getname() <<endl;
 				tepghi << arr[i].getmssv() <<endl;
@@ -652,11 +679,13 @@ int main(){
 			}
 			tepghi.close();
 			cout<<"\nSap xep thanh cong!\n"<<endl;
+
 		}else if(luachon==6){
 			cout<<"\nNhap MSSV cua sv muon xoa: ";
 			int msxoa;
 			cin>> msxoa ;
 			int check=1;
+
 			for(int i=0;i<sosv;i++){
 				if(msxoa==arr[i].getmssv()){
 					for(int j=i;j<sosv;j++){
@@ -685,10 +714,13 @@ int main(){
 			if(check){
 				cout<<"\nKhong tim thay sinh vien can xoa!\n"<<endl;
 			}
+
 		}else if(luachon==7){
 			lietkecpa(arr,sosv);
+
 		}else if(luachon==8){
 			lietkecc3(arr,sosv);
+
 		}else if(luachon==9){
 			sua(arr,sosv);
 			ofstream tepghi("D:\\Code cpp\\danhsach.txt");
@@ -707,13 +739,16 @@ int main(){
 			}
 			tepghi.close();
 			cout<<"Hoan tat!"<<endl;
+
 		}else if(luachon==10){
 			system("cls");
 		}
 		cout<<"Danh sach co "<<sosv <<" sinh vien!"<<endl;
 		}
 		return 0;
+
 	}else{
+
 		while(1){
 		cout<<"=============================== MENU ==============================="<<endl;
 		cout<<"1. In ra toan bo danh sach."<<endl;
@@ -725,14 +760,19 @@ int main(){
 		cout<<"7. Clear screen."<<endl;
 		cout<<"0. Thoat."<<endl;
 		cout<<"\nNhap vao lua chon cua ban: "; cin>> luachon;
+		
 	if(luachon==0){
 		break;
+
 	}else if(luachon==1){
 		inds(arr,sosv);
+
 	}else if(luachon==2){
 		timmssv(arr,sosv);
+
 	}else if(luachon==3){
 		timlop(arr, sosv);
+
 	}else if(luachon==4){
 		sapxep(arr,sosv);
 		ofstream tepghi("D:\\Code cpp\\danhsach.txt");
@@ -751,10 +791,13 @@ int main(){
 		}
 		tepghi.close();
 		cout<<"\nSap xep thanh cong!\n"<<endl;
+
 	}else if(luachon==5){
 		lietkecpa(arr,sosv);
+
 	}else if(luachon==6){
 		lietkecc3(arr,sosv);
+		
 	}else if(luachon==7){
 		system("cls");
 	}
