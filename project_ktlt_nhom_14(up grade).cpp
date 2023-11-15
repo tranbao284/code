@@ -1,5 +1,6 @@
 //duong dan file danh sach: D:\\Code cpp\\danhsach.txt
 //neu chua co file thi tao 1 file "danhsach.txt" trong folder "Code cpp" nam trong o dia D:
+//tao them 1 file taikhoan.txt cung vi tri voi file danhsach.txt
 
 #include<bits/stdc++.h>
 #include<conio.h>
