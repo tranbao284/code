@@ -1,6 +1,8 @@
-//duong dan file danh sach: D:\\Code cpp\\danhsach.txt
-//neu chua co file thi tao 1 file "danhsach.txt" trong folder "Code cpp" nam trong o dia D:
-//tao them 1 file taikhoan.txt cung vi tri voi file danhsach.txt
+//Dường dẫn file danh sach: "D:\\Code cpp\\danhsach.txt"
+//Hướng dẫn sử dụng:
+//Tạo 1 file "danhsach.txt" trong folder "Code cpp" nằm trong ổ D:
+//Tạo thêm 1 file "taikhoan.txt" cùng vị trí với file "danhsach.txt"
+//MSGV có dạng: 123.4566.7899 dùng để cài lại mật khẩu
 
 #include<bits/stdc++.h>
 #include<conio.h>
