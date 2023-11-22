@@ -2,7 +2,7 @@
 //Hướng dẫn sử dụng:
 //Tạo 1 file "danhsach.txt" trong folder "Code cpp" nằm trong ổ D:
 //Tạo thêm 1 file "taikhoan.txt" cùng vị trí với file "danhsach.txt"
-//MSGV có dạng: 123.4566.7899 dùng để cài lại mật khẩu
+//MSGV có dạng: 123.4566.7899 dùng để cài lại mật khẩu và tạo tài khoản
 
 #include<bits/stdc++.h>
 #include<conio.h>
@@ -190,8 +190,12 @@ void lietkecpa(sv arr[],int n){//ham liet ke sv co cpa gioi tro len
 			v.push_back(arr[i]);
 		}
 	}
+	int i=1;
 	for(sv x: v){
+
+		cout<<"STT "<<i<<endl;
 		x.in();
+		i++;
 	}
 }
 
@@ -202,8 +206,11 @@ void lietkecc3(sv arr[],int n){//ham liet ke sv dang canh cao muc 3
 			vcc3.push_back(arr[i]);
 		}
 	}
+	int i=1;
 	for(sv x: vcc3){
+		cout<<"STT "<<i<<endl;
 		x.in();
+		i++;
 	}
 }
 
@@ -306,10 +313,11 @@ int main(){
 	int sotk=0;
 	int quyen;
 	int isgv;
-	cout<<"Nhap vao lua chon"<<endl;
+	cout<<"Su dung voi quyen la: "<<endl;
 	cout<<"1: Sinh vien"<<endl;
 	cout<<"2: Giang vien"<<endl;
 	cout<<"0: Thoat"<<endl;
+	cout<<"Nhap vao lua chon: ";
 	cin>>quyen;
 
 	if (quyen==1){
@@ -333,12 +341,13 @@ int main(){
 		}
 		doctk.close();
 		sotk--;
-		cout<<"Nhap vao lua chon"<<endl;
+		cout<<"            MENU"<<endl;
 		cout<<"1. Dang nhap tai khoan giang vien"<<endl;
 		cout<<"2. Dang ky tai khoan giang vien"<<endl;
 		cout<<"3. Doi mat khau"<<endl;
 		cout<<"4. Su dung voi quyen la sinh vien"<<endl;
 		cout<<"0. Thoat"<<endl;
+		cout<<"Nhap vao lua chon: ";
 		int lctk;
 		cin>>lctk;
 
@@ -347,8 +356,8 @@ int main(){
 
 		}else if(lctk==1){
 			int kiemtra=0;
-			string kttk, ktmk;
 			while(kiemtra==0){
+				string kttk, ktmk;
 				cout<<"Nhap tai khoan: ";
 				cin.ignore();
 				getline(cin,kttk);
@@ -381,11 +390,12 @@ int main(){
 					isgv=1;
 				}else{
 					cout<<"\nTai khoan hoac mat khau khong dung."<<endl;
+					cout<<"Dang nhap that bai."<<endl;
 					int thoatdntk;
 					cout<<"Nhap 0 de thoat, 1 de dang nhap lai"<<endl;
 					cin>>thoatdntk;
 					if(thoatdntk==0){
-						return 0;
+					return 0;
 					}
 				}
 			}
@@ -394,6 +404,13 @@ int main(){
 			cout<<"Nhap tai khoan: ";
 			cin.ignore();
 			getline(cin,dktk);
+			for(int i=0; i<sotk;i++){
+				if(dktk==tkgv[i].gettk()){
+					cout<<"\nTai khoan da ton tai!"<<endl;
+					cout<<"Tao tai khoan that bai!"<<endl;
+					return 0;
+				}
+			}
 			cout<<"Nhap ma so giang vien: ";
 
 			while(1){
