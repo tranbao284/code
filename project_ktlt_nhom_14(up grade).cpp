@@ -308,7 +308,7 @@ void sua(sv arr[],int n){
 }
 
 int main(){
-	sv arr[1000];
+	sv arr[500];
 	taikhoan tkgv[20];
 	int sotk=0;
 	int quyen;
@@ -394,8 +394,10 @@ int main(){
 					int thoatdntk;
 					cout<<"Nhap 0 de thoat, 1 de dang nhap lai"<<endl;
 					cin>>thoatdntk;
-					if(thoatdntk==0){
-					return 0;
+					if(thoatdntk==1){
+						continue;
+					}else{
+						return 0;
 					}
 				}
 			}
@@ -820,7 +822,7 @@ int main(){
 	}else if(luachon==7){
 		system("cls");
 	}
-	cout<<"Danh sach co "<<sosv <<" sinh vien!"<<endl;
+	cout<<"Toan bo danh sach co "<<sosv <<" sinh vien!"<<endl;
 	}
 	return 0;
 	}
