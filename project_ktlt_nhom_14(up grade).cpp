@@ -763,6 +763,8 @@ int main(){
 
 		}else if(luachon==10){
 			system("cls");
+		}else{
+			return 0;
 		}
 		cout<<"Danh sach co "<<sosv <<" sinh vien!"<<endl;
 		}
@@ -821,6 +823,8 @@ int main(){
 		
 	}else if(luachon==7){
 		system("cls");
+	}else{
+		return 0;
 	}
 	cout<<"Toan bo danh sach co "<<sosv <<" sinh vien!"<<endl;
 	}
