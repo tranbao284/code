@@ -1,8 +1,8 @@
-//Dường dẫn file danh sach: "D:\\Code cpp\\danhsach.txt"
+//Đường dẫn file danh sach: "D:\\Code cpp\\danhsach.txt"
 //Hướng dẫn sử dụng:
 //Tạo 1 file "danhsach.txt" trong folder "Code cpp" nằm trong ổ D:
 //Tạo thêm 1 file "taikhoan.txt" cùng vị trí với file "danhsach.txt"
-//MSGV có dạng: 123.4566.7899 dùng để cài lại mật khẩu và tạo tài khoản
+//MSGV có dạng: 123.1234.6543 dùng để cài lại mật khẩu và tạo tài khoản
 
 #include<bits/stdc++.h>
 #include<conio.h>
@@ -18,15 +18,14 @@ class sv{
 
 	public:
 	void in(){//ham in ra sinh vien
-		cout<<"____________________________________________________________________\n";
-		cout<<"Ten sinh vien: "<<name<<endl;
-		cout<<"MSSV: "<<mssv<<endl;
-		cout<<"Lop: "<<lop<<endl;
-		cout<<"Ngay sinh: "<<ns<<endl;
-		cout<<"Gioi tinh: "<<gender<<endl;
-		cout<<"CPA: "<<fixed<<setprecision(2)<<CPA<<endl;
-		cout<<"So tin sv con no: "<<no<<endl;
-		cout<<"____________________________________________________________________\n";
+        cout<<"| "<< left << setw(25) <<name;
+		cout<<" | "<< left << setw(10) <<mssv;
+		cout<<" | "<< left << setw(8) <<lop;
+		cout<<" | "<< left << setw(10) <<ns;
+		cout<<" | "<< left << setw(9) <<gender;
+		cout<<" |"<< right << setw(5) << fixed <<setprecision(2) << CPA;
+        cout<<" | "<< left << setw(9) << no <<" |"<<endl;
+		cout<<"_______________________________________________________________________________________________________"<<endl;
 	}
 	
 	void nhap(){//ham nhap vao sinh vien
@@ -48,8 +47,11 @@ class sv{
 	}	
 
 	void chuanhoaname(){
-		if(! name.empty() && name[0]==' '){
+		while(! name.empty() && name[0]==' '){
 			name.erase( name.begin());
+		}
+		while(! name.empty() && name[name.length()-1]==' '){
+			name.erase( name.end()-1);
 		}
 	}
 
@@ -141,12 +143,14 @@ class taikhoan{
 };
 	
 void inds(sv arr[],int n){//ham in toan bo danh sach
-	cout<<"------------------------DANH SACH SINH VIEN-------------------------\n";	
+	cout<<"-----------------------------------------DANH SACH SINH VIEN-------------------------------------------"<<endl;	
+    cout<<"_______________________________________________________________________________________________________"<<endl;
+    cout<<"| STT |         Ho va ten         |    MSSV    |   lop    | ngay sinh  | gioi tinh | CPA  | so tin no |"<<endl;
+    cout<<"_______________________________________________________________________________________________________"<<endl;
 	for(int i=0;i<n;i++){
-		cout<<"\nSTT "<<i+1<<endl;
+		cout <<"| "<< left << setw(3)<<i+1<< " ";
 		arr[i].in();
 	}
-	cout<<"\n--------------------------------------------------------------------\n";
 }
 
 void timmssv(sv arr[], int n){//ham tim sv theo mssv
@@ -154,33 +158,51 @@ void timmssv(sv arr[], int n){//ham tim sv theo mssv
 	cout<<"\nNhap ma so sinh vien can tim: "; 
 	cin.ignore();
 	cin>> msct;
-	bool found=false;
+    vector<sv> v;
 	for(int i=0;i<n;i++){
 		if(msct== arr[i].getmssv()){
-			arr[i].in();
-			found=true;
+			v.push_back(arr[i]);
 		}
 	}
-	if(found==false){
-		cout<<"\nKhong tim thay!\n";
-	}
+    if (v.size()!=0){
+        int i=1;
+        cout<<"_______________________________________________________________________________________________________"<<endl;
+        cout<<"| STT |         Ho va ten         |    MSSV    |   lop    | ngay sinh  | gioi tinh | CPA  | so tin no |"<<endl;
+        cout<<"_______________________________________________________________________________________________________"<<endl;
+        for(sv x: v){
+            cout <<"| "<< left << setw(3)<<i<< " ";
+            x.in();
+            i++;
+        }
+    }else{
+        cout<<"Khong tim thay sinh vien nao!"<<endl;
+    }
 }
 
 void timlop(sv arr[], int n){//ham tim sv theo lop
 	string loptim;
+    vector<sv> v;
 	cout<<"\nNhap lop can tim: "; 
 	cin.ignore();
 	getline(cin,loptim);
-	bool found=false;
 	for(int i=0;i<n;i++){
 		if(loptim== arr[i].getlop()){
-			arr[i].in();
-			found=true;
+			v.push_back(arr[i]);
 		}
 	}
-	if(found==false){
-		cout<<"\nKhong tim thay!\n";
-	}
+    if (v.size()!=0){
+        int i=1;
+        cout<<"_______________________________________________________________________________________________________"<<endl;
+        cout<<"| STT |         Ho va ten         |    MSSV    |   lop    | ngay sinh  | gioi tinh | CPA  | so tin no |"<<endl;
+        cout<<"_______________________________________________________________________________________________________"<<endl;
+        for(sv x: v){
+            cout <<"| "<< left << setw(3)<<i<< " ";
+            x.in();
+            i++;
+        }
+    }else{
+        cout<<"Khong tim thay sinh vien nao!"<<endl;
+    }
 }
 
 void lietkecpa(sv arr[],int n){//ham liet ke sv co cpa gioi tro len
@@ -190,13 +212,29 @@ void lietkecpa(sv arr[],int n){//ham liet ke sv co cpa gioi tro len
 			v.push_back(arr[i]);
 		}
 	}
-	int i=1;
-	for(sv x: v){
-
-		cout<<"STT "<<i<<endl;
-		x.in();
-		i++;
+	for(unsigned int i=0; i<v.size(); i++){
+		sv tg;
+		for(unsigned int j=i; j<v.size(); j++){
+			if(v[i].getcpa()<v[j].getcpa()){
+				tg= v[i];
+				v[i]=v[j];
+				v[j]=tg;
+			}
+		}
 	}
+    if (v.size()!=0){
+        int i=1;
+        cout<<"_______________________________________________________________________________________________________"<<endl;
+        cout<<"| STT |         Ho va ten         |    MSSV    |   lop    | ngay sinh  | gioi tinh | CPA  | so tin no |"<<endl;
+        cout<<"_______________________________________________________________________________________________________"<<endl;
+        for(sv x: v){
+            cout <<"| "<< left << setw(3)<<i<< " ";
+            x.in();
+            i++;
+        }
+    }else{
+        cout<<"Khong tim thay sinh vien nao!"<<endl;
+    }
 }
 
 void lietkecc3(sv arr[],int n){//ham liet ke sv dang canh cao muc 3
@@ -206,12 +244,29 @@ void lietkecc3(sv arr[],int n){//ham liet ke sv dang canh cao muc 3
 			vcc3.push_back(arr[i]);
 		}
 	}
-	int i=1;
-	for(sv x: vcc3){
-		cout<<"STT "<<i<<endl;
-		x.in();
-		i++;
+	for(unsigned int i=0; i<vcc3.size(); i++){
+		sv tg;
+		for(unsigned int j=i; j<vcc3.size(); j++){
+			if(vcc3[i].getno()<vcc3[j].getno()){
+				tg= vcc3[i];
+				vcc3[i]=vcc3[j];
+				vcc3[j]=tg;
+			}
+		}
 	}
+	if (vcc3.size()!=0){
+        int i=1;
+        cout<<"_______________________________________________________________________________________________________"<<endl;
+        cout<<"| STT |         Ho va ten         |    MSSV    |   lop    | ngay sinh  | gioi tinh | CPA  | so tin no |"<<endl;
+        cout<<"_______________________________________________________________________________________________________"<<endl;
+        for(sv x: vcc3){
+            cout <<"| "<< left << setw(3)<<i<< " ";
+            x.in();
+            i++;
+        }
+    }else{
+        cout<<"Khong tim thay sinh vien nao!"<<endl;
+    }
 }
 
 vector<string> chuanhoa(string name){//loai bo space o ten va dua ten len dau de so sanh
@@ -402,104 +457,126 @@ int main(){
 				}
 			}
 		}else if(lctk==2){
-			string dktk, dkmsgv, dkmk, xnmk;
-			cout<<"Nhap tai khoan: ";
-			cin.ignore();
-			getline(cin,dktk);
-			for(int i=0; i<sotk;i++){
-				if(dktk==tkgv[i].gettk()){
-					cout<<"\nTai khoan da ton tai!"<<endl;
-					cout<<"Tao tai khoan that bai!"<<endl;
-					return 0;
-				}
-			}
-			cout<<"Nhap ma so giang vien: ";
-
 			while(1){
-				char ch = _getch();
-				if(ch==13){
-					regex kiemtramsgv("[0-9]{3}\\.[0-9]{4}\\.[0-9]{4}");
-					if(regex_match(dkmsgv, kiemtramsgv)){
+				int exist=0;
+				string dktk, dkmsgv, dkmk, xnmk;
+				cout<<"Nhap tai khoan: ";
+				cin.ignore();
+				getline(cin,dktk);
+				for(int i=0; i<sotk;i++){
+					if(dktk==tkgv[i].gettk()){
+						cout<<"\nTai khoan da ton tai!"<<endl;
+						cout<<"Tao tai khoan that bai!"<<endl;
+						exist=1;
 						break;
+					}
+				}
+
+				if(exist){
+					cout<<"Nhap vao 1 de nhap lai, 0 de thoat "<<endl;
+					int again;
+					cin>>again;
+					if(again==1){
+						continue;
 					}else{
-						cout<<"\nMa so giang vien khong hop le!";
 						return 0;
 					}
-				}else if(ch==8){
-					if(!dkmsgv.empty()){
-						cout<<"\b \b";
-						dkmsgv.pop_back();
-					}else{
-						continue;
-					}
-				}else{
-					cout<<"*";
-					dkmsgv+=ch;
 				}
-			}
-			cout<<"\nNhap mat khau: ";
+				cout<<"Nhap ma so giang vien: ";
 
-			while(1){
-				char ch = _getch();
-				if(ch==13){
-					if(dkmk.length()>7){
-						break;
-					}else{
-						cout<<"Mat khau qua yeu!"<<endl;
-						cout<<"Tao tai khoan that bai"<<endl;
-						return 0;
-					}
-				}else if(ch==8){
-					if(!dkmk.empty()){
-						cout<<"\b \b";
-						dkmk.pop_back();
-					}else{
-						continue;
-					}
-				}else{
-					cout<<"*";
-					dkmk+=ch;
-				}
-			}
-			cout<<"\nXac nhan mat khau: ";
+				while(1){
+					char ch = _getch();
+					if(ch==13){
+						regex kiemtramsgv("[0-9]{3}\\.[0-9]{4}\\.[0-9]{4}");
 
-			while(1){
-				char ch = _getch();
-				if(ch==13){
-					if(dkmk==xnmk){
-						break;
+						if(regex_match(dkmsgv, kiemtramsgv)){
+							break;
+						}else{
+							cout<<"\nMa so giang vien khong hop le!";
+							return 0;
+						}
+					}else if(ch==8){
+
+						if(!dkmsgv.empty()){
+							cout<<"\b \b";
+							dkmsgv.pop_back();
+						}else{
+							continue;
+						}
 					}else{
-						cout<<"Mat khau xac nhan khong chinh xac"<<endl;
-						cout<<"Tao tai khoan that bai"<<endl;
-						return 0;
+						cout<<"*";
+						dkmsgv+=ch;
 					}
-				}else if(ch==8){
-					if(!xnmk.empty()){
-						cout<<"\b \b";
-						xnmk.pop_back();
-					}else{
-						continue;
-					}
-				}else{
-					cout<<"*";
-					xnmk+=ch;
 				}
-			}
-			tkgv[sotk].settk(dktk);
-			tkgv[sotk].setmsgv(dkmsgv);
-			tkgv[sotk].setmk(dkmk);
-			ofstream ghitk("D:\\Code cpp\\taikhoan.txt", ios::app);
-			if(ghitk.fail()){
-				cout<<"Mo file that bai!";
-				return -1;
-			}
-			ghitk << tkgv[sotk].gettk()<<endl;
-			ghitk << tkgv[sotk].getmsgv()<<endl;
-			ghitk << tkgv[sotk].getmk()<<endl;
-			ghitk.close();
-			cout<<"Tao tai khoan thanh cong!"<<endl;
-			sotk++;
-			isgv=1;
+				cout<<"\nNhap mat khau: ";
+
+				while(1){
+					char ch = _getch();
+
+					if(ch==13){
+
+						if(dkmk.length()>7){
+							break;
+						}else{
+							cout<<"\nMat khau qua yeu!"<<endl;
+							cout<<"Tao tai khoan that bai"<<endl;
+							return 0;
+						}
+					}else if(ch==8){
+
+						if(!dkmk.empty()){
+							cout<<"\b \b";
+							dkmk.pop_back();
+						}else{
+							continue;
+						}
+					}else{
+						cout<<"*";
+						dkmk+=ch;
+					}
+				}
+				cout<<"\nXac nhan mat khau: ";
+
+				while(1){
+					char ch = _getch();
+
+					if(ch==13){
+						if(dkmk==xnmk){
+							break;
+						}else{
+							cout<<"\nMat khau xac nhan khong chinh xac"<<endl;
+							cout<<"Tao tai khoan that bai"<<endl;
+							return 0;
+						}
+					}else if(ch==8){
+						if(!xnmk.empty()){
+							cout<<"\b \b";
+							xnmk.pop_back();
+						}else{
+							continue;
+						}
+					}else{
+						cout<<"*";
+						xnmk+=ch;
+					}
+				}
+				tkgv[sotk].settk(dktk);
+				tkgv[sotk].setmsgv(dkmsgv);
+				tkgv[sotk].setmk(dkmk);
+				ofstream ghitk("D:\\Code cpp\\taikhoan.txt", ios::app);
+				if(ghitk.fail()){
+					cout<<"Mo file that bai!";
+					return -1;
+				}
+				ghitk << tkgv[sotk].gettk()<<endl;
+				ghitk << tkgv[sotk].getmsgv()<<endl;
+				ghitk << tkgv[sotk].getmk()<<endl;
+				ghitk.close();
+				cout<<"Tao tai khoan thanh cong!"<<endl;
+				sotk++;
+				isgv=1;
+				break;
+		}
 
 		}else if(lctk==3){
 			string tkdmk, msgvdmk;
@@ -507,7 +584,31 @@ int main(){
 			cin.ignore();
 			getline(cin,tkdmk);
 			cout<<"Nhap vao ma so giang vien: ";
-			getline(cin,msgvdmk);
+			// getline(cin,msgvdmk);
+			while(1){
+					char ch = _getch();
+					if(ch==13){
+						regex kiemtramsgv("[0-9]{3}\\.[0-9]{4}\\.[0-9]{4}");
+
+						if(regex_match(msgvdmk, kiemtramsgv)){
+							break;
+						}else{
+							cout<<"\nMa so giang vien khong hop le!";
+							return 0;
+						}
+					}else if(ch==8){
+
+						if(!msgvdmk.empty()){
+							cout<<"\b \b";
+							msgvdmk.pop_back();
+						}else{
+							continue;
+						}
+					}else{
+						cout<<"*";
+						msgvdmk+=ch;
+					}
+			}
 			int checkdmk=0, shtk;
 
 			for(int i=0; i< sotk; i++){
@@ -523,12 +624,13 @@ int main(){
 				cout<<"\nNhap mat khau moi: ";
 				while(1){
 					char ch = _getch();
+
 					if(ch==13){
 						if(dkmkm.length()>7){
 							break;
 						}else{
-							cout<<"Mat khau qua yeu!"<<endl;
-							cout<<"Tao tai khoan that bai"<<endl;
+							cout<<"\nMat khau qua yeu!"<<endl;
+							cout<<"Doi mat khau that bai"<<endl;
 							return 0;
 						}
 					}else if(ch==8){
@@ -547,12 +649,13 @@ int main(){
 
 				while(1){
 					char ch = _getch();
+
 					if(ch==13){
 						if(dkmkm==xnmkm){
 							break;
 						}else{
-							cout<<"Mat khau xac nhan khong chinh xac"<<endl;
-							cout<<"Tao tai khoan that bai"<<endl;
+							cout<<"\nMat khau xac nhan khong chinh xac"<<endl;
+							cout<<"Doi mat khau that bai"<<endl;
 							return 0;
 						}
 					}else if(ch==8){
@@ -570,6 +673,7 @@ int main(){
 
 				tkgv[shtk].setmk(dkmkm);
 				ofstream ghitk("D:\\Code cpp\\taikhoan.txt");
+				
 				if(ghitk.fail()){
 					cout<<"Mo tep tai khoan that bai"<<endl;
 					return -1;
@@ -763,10 +867,10 @@ int main(){
 
 		}else if(luachon==10){
 			system("cls");
+			
 		}else{
-			return 0;
+			return 1;
 		}
-		cout<<"Danh sach co "<<sosv <<" sinh vien!"<<endl;
 		}
 		return 0;
 
@@ -823,10 +927,10 @@ int main(){
 		
 	}else if(luachon==7){
 		system("cls");
+
 	}else{
-		return 0;
+		return 1;
 	}
-	cout<<"Toan bo danh sach co "<<sosv <<" sinh vien!"<<endl;
 	}
 	return 0;
 	}
